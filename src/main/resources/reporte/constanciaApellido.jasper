@@ -1,0 +1,5 @@
+InputStream inputStream = this.getClass().getResourceAsStream("C:\Users\Usuario\JaspersoftWorkspace\EF-LP\constanciaApellido.jasper");
+if (inputStream == null) {
+    throw new FileNotFoundException("No se encontró el archivo constanciaApellido.jasper");
+}
+JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, parametros, dataSource);

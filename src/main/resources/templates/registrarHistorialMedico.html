@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Historial Médico</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-4">Registrar Historial Médico</h2>
+        <form th:action="@{/historialMedico/registrar}" th:object="${historialMedico}" method="post">
+            
+            <div class="form-group">
+                <label for="paciente">Paciente</label>
+                <select id="paciente" name="paciente" class="form-control" th:field="*{paciente.id}">
+                    <option th:each="paciente : ${pacientes}" 
+                            th:value="${paciente.id}" 
+                            th:text="${paciente.nombre + ' ' + paciente.apellido}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="diagnostico">Diagnóstico</label>
+                <input type="text" id="diagnostico" name="diagnostico" class="form-control" th:field="*{diagnostico}">
+            </div>
+
+            <div class="form-group">
+                <label for="radiografiaUrl">URL de Radiografía</label>
+                <input type="text" id="radiografiaUrl" name="radiografiaUrl" class="form-control" th:field="*{radiografiaUrl}">
+            </div>
+
+            <div class="form-group">
+                <label for="medico">Médico</label>
+                <select id="medico" name="medico" class="form-control" th:field="*{medico.id}">
+                    <option th:each="medico : ${medicos}" 
+                            th:value="${medico.id}" 
+                            th:text="${medico.nombre + ' ' + medico.apellido}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Registrar</button>
+        </form>
+    </div>
+</body>
+</html>

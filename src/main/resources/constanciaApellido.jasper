@@ -1,0 +1,21 @@
+private void generarConstanciaPDF(Paciente paciente, Model model) {
+    try {
+        // Conexión a la base de datos
+        Connection conn = // obtener conexión
+
+        // Cargar el archivo jasper
+        InputStream jasperStream = this.getClass().getResourceAsStream("/report/constanciaApellido.jasper");
+        Map<String, Object> params = new HashMap<>();
+        params.put("pacienteId", paciente.getId()); // Ajusta si usas otros parámetros
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperStream);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, conn);
+
+        // Exportar el reporte a PDF
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "constancia_" + paciente.getApellido() + ".pdf");
+        conn.close();
+    } catch (JRException | SQLException e) {
+        e.printStackTrace();
+        model.addAttribute("error", "Error al generar el PDF: " + e.getMessage());
+    }
+}
